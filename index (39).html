@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AtividadeProfAdriana | Aprenda Programação</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f7f8fc;--text:#182033;--muted:#667085;--primary:#6c5ce7;--primary-dark:#5142c4;--dark:#12162a;--border:#e6e8f0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.container{width:min(1120px,92%);margin:auto}
+.header{position:sticky;top:0;z-index:10;background:#ffffffdd;backdrop-filter:blur(15px);border-bottom:1px solid var(--border)}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between}
+.logo{color:var(--text);text-decoration:none;font-size:1.2rem;font-weight:800}.logo span{color:var(--primary)}
+nav{display:flex;gap:28px}nav a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:600}nav a:hover{color:var(--primary)}
+.menu-btn{display:none;border:0;background:none;font-size:1.5rem;cursor:pointer}
+
+.intro-heading{max-width:850px;margin-bottom:32px}
+.intro-heading h1{font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:-3px;margin-bottom:20px}
+.intro-text{color:var(--muted);font-size:1.12rem;max-width:850px;line-height:1.8}
+.fundamentals-title{margin:28px 0 22px}
+.fundamentals-title h2{font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-1px}
+.fundamentals-grid{grid-template-columns:repeat(3,1fr)}
+
+.movement-group h4{color:#5aa9ff}
+.control-group h4{color:#ff9d4d}
+.appearance-group h4{color:#b887ff}.appearance-group{border-top-color:#7657b8}
+.sound-group h4{color:#ff6fae}.sound-group{border-top-color:#d94f91}
+
+.movement-group .block{background:#2878d4}
+.control-group .block{background:#e98532}
+.appearance-group .block{background:#7657b8}
+.sound-group .block{background:#d94f91}
+
+.command-group{margin-top:22px;padding-top:16px;border-top:1px solid #303754}
+.command-group:first-of-type{margin-top:12px;padding-top:0;border-top:0}
+.command-group h4{font-size:.92rem;color:#dfe3f5;margin-bottom:8px}
+.blocks-panel{max-height:650px;overflow-y:auto}
+
+.hero{padding:105px 0 115px;background:radial-gradient(circle at 90% 10%,#6c5ce724,transparent 35%),radial-gradient(circle at 10% 80%,#24c6dc1f,transparent 30%)}
+.hero-content{display:grid;grid-template-columns:1fr .85fr;gap:80px;align-items:center}
+.eyebrow{color:var(--primary);font-size:.76rem;font-weight:800;letter-spacing:2px;margin-bottom:14px}
+h1{max-width:700px;font-size:clamp(2.8rem,6vw,5.3rem);line-height:1.02;letter-spacing:-4px;margin-bottom:25px}h1 span{color:var(--primary)}
+.hero-text{color:var(--muted);max-width:560px;font-size:1.08rem;margin-bottom:32px}
+.hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:13px 21px;border-radius:10px;text-decoration:none;font-weight:700;transition:.2s}.btn:hover{transform:translateY(-2px)}
+.primary{color:white;background:var(--primary);box-shadow:0 10px 25px #6c5ce740}.secondary{color:var(--text);background:white;border:1px solid var(--border)}
+.code-card{background:#171b32;border-radius:18px;overflow:hidden;box-shadow:0 25px 60px #191b3733;transform:rotate(2deg)}
+.window-bar{display:flex;align-items:center;gap:7px;padding:14px 18px;background:#202541;color:#9ca5c4;font-size:.8rem}.window-bar i{width:9px;height:9px;display:block;border-radius:50%;background:#6d7595}.window-bar span{margin-left:10px}
+pre{padding:28px;overflow-x:auto;font-size:.93rem;line-height:1.9}.purple{color:#c792ea}.blue{color:#82aaff}.green{color:#c3e88d}.yellow{color:#ffcb6b}.orange{color:#f78c6c}
+.section{padding:100px 0}.section-heading{max-width:650px;margin-bottom:42px}.section-heading h2{font-size:clamp(2rem,4vw,3.2rem);line-height:1.1;letter-spacing:-2px;margin-bottom:14px}.section-heading p:not(.eyebrow){color:var(--muted);font-size:1.05rem}
+.logic-grid,.concepts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.info-card,.concept-card{background:white;border:1px solid var(--border);border-radius:18px;padding:28px;transition:.25s}.info-card:hover,.concept-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px #19234614}
+.icon{font-size:2rem;margin-bottom:18px}.info-card h3,.concept-card h3{font-size:1.3rem;margin-bottom:8px}.info-card p,.concept-card p{color:var(--muted);margin-bottom:20px}
+.learn-btn{border:0;background:transparent;color:var(--primary);font-weight:800;cursor:pointer;padding:0}.example-box{margin-top:24px;padding:18px 20px;border-left:4px solid var(--primary);border-radius:8px;background:#eeecff;color:#3d356e}
+.dark-section{color:white;background:var(--dark)}.light .eyebrow{color:#8b7dff}.light h2{color:white}.light p:not(.eyebrow){color:#aeb5cc}
+.scratch-layout{display:grid;grid-template-columns:260px 1fr;gap:28px}.blocks-panel,.program-area{background:#1d223b;border:1px solid #2c3352;border-radius:16px;padding:22px}.blocks-panel h3,.program-area h3{margin-bottom:4px}.small{color:#929bb8;font-size:.85rem;margin-bottom:18px}
+.block{width:100%;display:block;text-align:left;border:0;color:white;padding:12px 14px;border-radius:8px;margin:8px 0;cursor:pointer;font-weight:700;transition:.2s}.block:hover{transform:translateX(4px);filter:brightness(1.1)}
+.move{background:#2878d4}.turn{background:#8a4bc5}.say{background:#d59a20}.wait{background:#3d9c62}.up{background:#1b9aaa}.down{background:#3478b9}.left{background:#c4518c}.right{background:#d16b35}.costume{background:#7657b8}.sound{background:#a83f72}
+.stage-area{display:grid;gap:18px}.stage{position:relative;height:310px;overflow:hidden;border-radius:16px;background:#f4f5fb}
+.stage-grid{position:absolute;inset:0;opacity:.35;background-image:linear-gradient(#d5d8e5 1px,transparent 1px),linear-gradient(90deg,#d5d8e5 1px,transparent 1px);background-size:30px 30px}
+.cat{position:absolute;left:50%;top:50%;font-size:3.3rem;transform:translate(-50%,-50%) rotate(0deg);transition:left .55s,top .55s,transform .55s;z-index:2;user-select:none}
+.speech{position:absolute;left:55%;top:35%;padding:8px 12px;color:#222;background:white;border-radius:10px;box-shadow:0 4px 14px #0002;display:none;z-index:3}.speech.show{display:block}
+.program-header{display:flex;justify-content:space-between;align-items:center}.clear-btn{color:#9ca5c4;border:0;background:none;cursor:pointer}
+.program{min-height:90px;padding:12px;margin:15px 0;border-radius:9px;background:#13172b}.empty-program{color:#777f9e;font-size:.9rem}
+.program-item{display:flex;align-items:center;gap:8px;padding:8px 10px;margin-bottom:6px;border-radius:6px;color:white;font-size:.9rem}
+.run-btn{width:100%;border:0;border-radius:9px;padding:13px;background:var(--primary);color:white;font-weight:800;cursor:pointer}
+.concepts-grid{grid-template-columns:repeat(4,1fr)}.number{display:inline-block;color:var(--primary);font-weight:900;margin-bottom:20px}.concept-card code{display:inline-block;padding:7px 10px;border-radius:6px;background:#f0efff;color:var(--primary-dark);font-size:.82rem}
+.quiz-section{padding-top:0}.quiz-card{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:45px;border-radius:22px;background:linear-gradient(135deg,#e9e7ff,#e9faff)}
+.quiz-content{flex:1}
+.quiz-progress{color:var(--primary);font-weight:800;font-size:.9rem;margin-top:12px}
+.next-question{margin-top:18px;border:0;border-radius:9px;padding:12px 18px;background:var(--primary);color:white;font-weight:800;cursor:pointer}
+
+.quiz-card h2{font-size:2rem;margin-bottom:8px}.quiz-card #question{margin:20px 0 18px;font-weight:800;font-size:1.45rem;line-height:1.35}
+.answers{display:flex;flex-wrap:wrap;gap:10px}.answer{border:1px solid #d7d9e7;background:white;padding:10px 13px;border-radius:8px;cursor:pointer;transition:.2s}.answer:hover{border-color:var(--primary)}.quiz-result{font-weight:800;margin-top:15px}.trophy{font-size:6rem}
+footer{background:#111426;color:white;padding:28px 0}.footer-content{display:flex;justify-content:space-between;gap:20px}.footer-content span{color:#929bb8}
+@media(max-width:850px){.hero-content,.scratch-layout{grid-template-columns:1fr}.logic-grid,.concepts-grid,.fundamentals-grid{grid-template-columns:repeat(2,1fr)}.code-card{transform:none}}
+@media(max-width:620px){.logic-grid,.concepts-grid,.fundamentals-grid{grid-template-columns:1fr}nav{position:absolute;top:74px;left:0;right:0;display:none;flex-direction:column;gap:0;padding:10px 4%;background:white;border-bottom:1px solid var(--border)}nav.open{display:flex}nav a{padding:12px 0}.menu-btn{display:block}.hero{padding:70px 0}h1{letter-spacing:-2px}.section{padding:70px 0}.quiz-card{padding:30px;flex-direction:column;align-items:flex-start}.trophy{font-size:4rem}.footer-content{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="header"><div class="container nav"><a class="logo" href="#inicio">Atividade<span>ProfAdriana</span></a><button class="menu-btn" id="menuBtn">☰</button><nav id="navMenu"><a href="#logica">Lógica</a><a href="#scratch">Simulador Scratch</a><a href="#conceitos">Conceitos</a><a href="#quiz">Quiz</a></nav></div></header>
+
+<main>
+<section class="hero" id="inicio">
+<div class="container">
+<div class="section-heading intro-heading">
+<p class="eyebrow">01 • FUNDAMENTOS</p>
+<h1>A Lógica de Programação</h1>
+<p class="intro-text">Programar não significa apenas digitar códigos misteriosos, é resolver problemas de forma organizada. A lógica é a estrutura matemática e sequencial que criamos na mente para instruir o computador a fazer tarefas exatamente como queremos.</p>
+</div>
+
+<div class="fundamentals-title">
+<h2>Conceitos Fundamentais</h2>
+</div>
+
+<div class="logic-grid fundamentals-grid">
+<article class="info-card">
+<div class="icon">🧩</div>
+<h3>Algoritmos</h3>
+<p>Uma sequência lógica finita de passos. Como seguir um mapa ou uma receita!</p>
+<button class="learn-btn" data-topic="algoritmo">Ver exemplo →</button>
+</article>
+
+<article class="info-card">
+<div class="icon">🔀</div>
+<h3>Condições</h3>
+<p>Tomadas de decisão usando <strong>"Se... então"</strong>. Cria regras dinâmicas no seu código.</p>
+<button class="learn-btn" data-topic="condicao">Ver exemplo →</button>
+</article>
+
+<article class="info-card">
+<div class="icon">🔁</div>
+<h3>Loops (Laços)</h3>
+<p>Repetem um bloco de código várias vezes, economizando tempo e linhas de programação.</p>
+<button class="learn-btn" data-topic="repeticao">Ver exemplo →</button>
+</article>
+</div>
+
+<div class="example-box" id="logicExample"><strong>💡 Dica:</strong> Clique em um dos conceitos acima para ver um exemplo prático.</div>
+</div>
+</section>
+
+<section class="section dark-section" id="scratch"><div class="container"><div class="section-heading light"><p class="eyebrow">02 • MÃO NA MASSA</p><h2>Simulador de Scratch</h2><p>Monte uma sequência de blocos e veja seu personagem executar cada comando de verdade.</p></div><div class="scratch-layout">
+<div class="blocks-panel">
+<h3>Blocos de comandos</h3>
+<p class="small">Escolha uma categoria e clique nos blocos para montar seu programa.</p>
+
+<div class="command-group movement-group">
+<h4>🚶 Movimentação</h4>
+<button class="block move" data-command="move">↔ Mover 10 passos</button>
+<button class="block up" data-command="up">⬆️ Mover para cima</button>
+<button class="block down" data-command="down">⬇️ Mover para baixo</button>
+<button class="block left" data-command="left">⬅️ Mover para esquerda</button>
+<button class="block right" data-command="right">➡️ Mover para direita</button>
+</div>
+
+<div class="command-group control-group">
+<h4>🔄 Controle</h4>
+<button class="block turn" data-command="turn">↻ Girar 90°</button>
+<button class="block wait" data-command="wait">⏱ Esperar 1 segundo</button>
+</div>
+
+<div class="command-group appearance-group">
+<h4>👻 Aparência</h4>
+<button class="block say" data-command="say">💬 Dizer "Olá!"</button>
+<button class="block costume" data-command="costume">👻 Mudar aparência</button>
+</div>
+
+<div class="command-group sound-group">
+<h4>🔊 Som</h4>
+<button class="block sound" data-command="sound">🔊 Tocar som</button>
+</div>
+</div>
+<div class="stage-area"><div class="stage" id="stage"><div class="stage-grid"></div><div class="cat" id="cat">🐱</div><div class="speech" id="speech"></div></div><div class="program-area"><div class="program-header"><h3>Seu programa</h3><button id="clearProgram" class="clear-btn">Limpar</button></div><div class="program" id="program"><p class="empty-program">Clique nos blocos para montar seu programa.</p></div><button class="run-btn" id="runProgram">▶ Executar programa</button></div></div>
+</div></div></section>
+
+<section class="section" id="conceitos"><div class="container"><div class="section-heading"><p class="eyebrow">03 • CONHECIMENTO</p><h2>Conceitos essenciais</h2><p>Conheça algumas ideias que aparecem em praticamente toda linguagem de programação.</p></div><div class="concepts-grid"><article class="concept-card"><span class="number">01</span><h3>Variáveis</h3><p>Espaços usados para guardar informações que podem ser utilizadas pelo programa.</p><code>nome = "Adriana"</code></article><article class="concept-card"><span class="number">02</span><h3>Condições</h3><p>Permitem que o programa tome decisões com base em uma situação.</p><code>se idade &gt;= 18</code></article><article class="concept-card"><span class="number">03</span><h3>Laços de repetição</h3><p>Executam um conjunto de instruções várias vezes de forma automática.</p><code>repita 10 vezes</code></article><article class="concept-card"><span class="number">04</span><h3>Funções</h3><p>Blocos de código que podem ser reutilizados para realizar uma tarefa.</p><code>funcao saudar()</code></article></div></div></section>
+
+<section class="section quiz-section" id="quiz">
+<div class="container quiz-card">
+<div class="quiz-content">
+<p class="eyebrow">DESAFIO FINAL</p>
+<h2>Teste seus conhecimentos</h2>
+
+<div id="studentInputArea" style="margin-bottom: 15px; display: flex; flex-wrap: wrap; gap: 15px;">
+  <div style="flex: 1; min-width: 200px;">
+    <label for="studentName" style="font-weight: 700; display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text);">Seu Nome Completo:</label>
+    <input type="text" id="studentName" placeholder="Digite seu nome" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d7d9e7; font-family: inherit;">
+  </div>
+  <div style="width: 120px;">
+    <label for="studentClass" style="font-weight: 700; display: block; margin-bottom: 5px; font-size: 0.9rem; color: var(--text);">Sua Turma:</label>
+    <input type="text" id="studentClass" placeholder="Ex: 7º A" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d7d9e7; font-family: inherit;">
+  </div>
+</div>
+
+<div class="quiz-progress" id="quizProgress">Pergunta 1 de 10</div>
+<p id="question">O que é um algoritmo?</p>
+<div class="answers" id="answers"></div>
+<p class="quiz-result" id="quizResult"></p>
+<button class="next-question" id="nextQuestion" style="display:none">Próxima pergunta →</button>
+
+<div id="shareArea" style="display:none; margin-top: 20px;">
+  <button id="copyLinkBtn" style="border:0; border-radius:9px; padding:12px 18px; background:#2e9b61; color:white; font-weight:800; cursor:pointer;">📋 Copiar Link das Respostas</button>
+</div>
+</div>
+<div class="trophy">🏆</div>
+</div>
+</section>
+
+<section class="section" id="professorPanel" style="display:none; background: #f0f2f9;">
+<div class="container" style="background: white; padding: 40px; border-radius: 22px; box-shadow: 0 10px 30px #0001;">
+  <p class="eyebrow" style="color: var(--primary);">PAINEL DO PROFESSOR</p>
+  <h2 style="font-size: 2.2rem; margin-bottom: 5px;" id="profTitle">Respostas do Aluno</h2>
+  <h3 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 15px;" id="profClassTitle">Turma: </h3>
+  <p style="margin-bottom: 30px; color: var(--muted);" id="profScoreSummary"></p>
+  <div id="profAnswersList" style="display: flex; flex-direction: column; gap: 20px;"></div>
+  <a href="." style="display: inline-block; margin-top: 30px; color: var(--primary); font-weight: 700; text-decoration: none;">← Voltar para o Quiz Normal</a>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer-content"><strong>© Com carinho, prof Adri!</strong></div></footer>
+
+<script>
+const menuBtn=document.getElementById("menuBtn"),navMenu=document.getElementById("navMenu");
+menuBtn.addEventListener("click",()=>navMenu.classList.toggle("open"));
+document.querySelectorAll("nav a").forEach(link=>link.addEventListener("click",()=>navMenu.classList.remove("open")));
+
+const examples={algoritmo:"<strong>Exemplo:</strong> Para fazer um sanduíche: 1. pegar o pão → 2. colocar o recheio → 3. fechar o pão. Isso é um algoritmo!",condicao:"<strong>Exemplo:</strong> Se estiver chovendo, levar guarda-chuva. Caso contrário, sair sem ele. O programa escolhe um caminho.",repeticao:"<strong>Exemplo:</strong> Em vez de escrever “bata palmas” 10 vezes, usamos uma repetição: <strong>repita 10 vezes</strong>."};
+document.querySelectorAll(".learn-btn").forEach(button=>button.addEventListener("click",()=>document.getElementById("logicExample").innerHTML=examples[button.dataset.topic]));
+
+const program=[],programEl=document.getElementById("program"),cat=document.getElementById("cat"),speech=document.getElementById("speech"),stage=document.getElementById("stage");
+const blockInfo={
+move:{text:"↔ Mover 10 passos",className:"move"},
+turn:{text:"↻ Girar 90°",className:"turn"},
+say:{text:'💬 Dizer "Olá!"',className:"say"},
+wait:{text:"⏱ Esperar 1 segundo",className:"wait"},
+up:{text:"⬆️ Mover para cima",className:"up"},
+down:{text:"⬇️ Mover para baixo",className:"down"},
+left:{text:"⬅️ Mover para esquerda",className:"left"},
+right:{text:"➡️ Mover para direita",className:"right"},
+costume:{text:"👻 Mudar aparência",className:"costume"},
+sound:{text:"🔊 Tocar som",className:"sound"}
+};
+
+document.querySelectorAll(".block").forEach(block=>block.addEventListener("click",()=>{program.push(block.dataset.command);renderProgram()}));
+function renderProgram(){if(!program.length){programEl.innerHTML='<p class="empty-program">Clique nos blocos para montar seu programa.</p>';return}programEl.innerHTML=program.map((command,index)=>{const item=blockInfo[command];return `<div class="program-item ${item.className}">${index+1}. ${item.text}</div>`}).join("")}
+document.getElementById("clearProgram").addEventListener("click",()=>{program.length=0;renderProgram();resetCat()});
+
+let x=50,y=50,rotation=0,costume=false;
+function resetCat(){x=50;y=50;rotation=0;costume=false;cat.textContent="🐱";cat.style.left=x+"%";cat.style.top=y+"%";cat.style.transform="translate(-50%,-50%) rotate(0deg)";speech.classList.remove("show")}
+function updateCat(){cat.style.left=x+"%";cat.style.top=y+"%";cat.style.transform=`translate(-50%,-50%) rotate(${rotation}deg)`}
+
+let audioCtx = null;
+function playSound(){
+  try{
+    const AudioContext=window.AudioContext||window.webkitAudioContext;
+    if(!audioCtx) audioCtx = new AudioContext();
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+    osc.type="sine";osc.frequency.setValueAtTime(660,audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(990,audioCtx.currentTime+.18);
+    gain.gain.setValueAtTime(.25,audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.35);
+    osc.connect(gain);gain.connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+.35);
+  }catch(e){console.log("Áudio não disponível")}
+}
+
+document.getElementById("runProgram").addEventListener("click",async()=>{
+if(!program.length){alert("Adicione pelo menos um bloco ao seu programa!");return}
+resetCat();
+for(const command of program){
+if(command==="move"){x=Math.min(90,x+7);updateCat();await wait(550)}
+if(command==="up"){y=Math.max(10,y-7);updateCat();await wait(550)}
+if(command==="down"){y=Math.min(90,y+7);updateCat();await wait(550)}
+if(command==="left"){x=Math.max(10,x-7);updateCat();await wait(550)}
+if(command==="right"){x=Math.min(90,x+7);updateCat();await wait(550)}
+if(command==="turn"){rotation+=90;updateCat();await wait(550)}
+if(command==="say"){speech.textContent="Olá!";speech.classList.add("show");await wait(1000);speech.classList.remove("show")}
+if(command==="wait"){await wait(1000)}
+if(command==="costume"){costume=!costume;cat.textContent=costume?"🐸":"🐱";await wait(650)}
+if(command==="sound"){playSound();await wait(500)}
+}
+});
+
+function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
+
+const quizQuestions=[
+{q:"O que é um algoritmo?",a:["Uma sequência de passos para resolver um problema","Um tipo de computador","Uma imagem usada em um programa"],c:0},
+{q:"O que é uma variável?",a:["Um espaço para guardar informações","Um erro no programa","Um tipo de teclado"],c:0},
+{q:"Para que serve uma condição?",a:["Para tomar decisões no programa","Para desligar o computador","Para criar imagens"],c:0},
+{q:"O que um loop (laço) faz?",a:["Repete comandos","Apaga o código","Cria um computador"],c:0},
+{q:"Qual destes é um exemplo de linguagem de programação?",a:["JavaScript","Google","Mouse"],c:0},
+{q:"O que é uma função?",a:["Um bloco de código reutilizável","Um botão do teclado","Uma pasta do computador"],c:0},
+{q:"O que significa depurar um programa?",a:["Encontrar e corrigir erros","Apagar todos os arquivos","Aumentar o volume"],c:0},
+{q:"O que acontece em uma condição 'se... então'?",a:["O programa toma uma decisão","O computador sempre reinicia","O código desaparece"],c:0},
+{q:"Qual comando do simulador faz o personagem se mover?",a:["Mover 10 passos","Dizer Olá","Tocar som"],c:0},
+{q:"Por que a lógica é importante na programação?",a:["Porque ajuda a organizar a solução de problemas","Porque deixa o computador mais pesado","Porque substitui o teclado"],c:0}
+];
+
+let currentQuestion=0,score=0;
+const studentSelections = [];
+
+const questionEl=document.getElementById("question");
+const answersEl=document.getElementById("answers");
+const resultEl=document.getElementById("quizResult");
+const progressEl=document.getElementById("quizProgress");
+const nextBtn=document.getElementById("nextQuestion");
+const copyLinkBtn=document.getElementById("copyLinkBtn");
+const shareArea=document.getElementById("shareArea");
+const studentNameInput=document.getElementById("studentName");
+const studentClassInput=document.getElementById("studentClass");
+const studentInputArea=document.getElementById("studentInputArea");
+
+function loadQuestion(){
+const item=quizQuestions[currentQuestion];
+progressEl.textContent=`Pergunta ${currentQuestion+1} de ${quizQuestions.length}`;
+questionEl.textContent=item.q;
+answersEl.innerHTML=item.a.map((answer,index)=>`<button class="answer" data-index="${index}">${answer}</button>`).join("");
+resultEl.textContent="";
+nextBtn.style.display="none";
+answersEl.querySelectorAll(".answer").forEach(answer=>answer.addEventListener("click",()=>{
+answersEl.querySelectorAll(".answer").forEach(button=>button.disabled=true);
+const selectedIndex = Number(answer.dataset.index);
+studentSelections.push(selectedIndex);
+
+const correct=selectedIndex===item.c;
+if(correct){score++;resultEl.textContent="🎉 Muito bem! Você acertou!";resultEl.style.color="#2e9b61"}
+else{resultEl.textContent=`🤔 Quase! A resposta correta é: ${item.a[item.c]}`;resultEl.style.color="#d04b4b"}
+nextBtn.style.display="inline-block";
+}));
+}
+
+nextBtn.addEventListener("click",()=>{
+currentQuestion++;
+if(currentQuestion<quizQuestions.length)loadQuestion();
+else{
+progressEl.textContent="Quiz concluído!";
+questionEl.textContent=`Você terminou o quiz com ${score} de ${quizQuestions.length} acertos!`;
+answersEl.innerHTML="";
+resultEl.textContent=score>=8?"🏆 Excelente! Você domina muito bem os conceitos!":score>=5?"👏 Muito bom! Continue praticando!":"💡 Continue estudando e tente novamente!";
+resultEl.style.color=score>=5?"#2e9b61":"#d04b4b";
+
+studentInputArea.style.display="none";
+shareArea.style.display="block";
+
+nextBtn.textContent="🔄 Refazer quiz";
+nextBtn.style.display="inline-block";
+nextBtn.onclick=()=>{
+  currentQuestion=0;score=0;studentSelections.length=0;
+  nextBtn.textContent="Próxima pergunta →";nextBtn.onclick=null;
+  shareArea.style.display="none";studentInputArea.style.display="block";
+  loadQuestion()
+};
+}
+});
+
+copyLinkBtn.addEventListener("click", () => {
+  const name = studentNameInput.value.trim() || "Aluno Anônimo";
+  const className = studentClassInput.value.trim() || "Não Informada";
+  const baseUrl = window.location.origin + window.location.pathname;
+  const answersParam = studentSelections.join(",");
+  const fullUrl = `${baseUrl}?modo=prof&nome=${encodeURIComponent(name)}&turma=${encodeURIComponent(className)}&respostas=${answersParam}`;
+  
+  navigator.clipboard.writeText(fullUrl).then(() => {
+    copyLinkBtn.textContent = "✅ Link Copiado! Envie para a Profª";
+    copyLinkBtn.style.background = "#1b9aaa";
+    setTimeout(() => {
+      copyLinkBtn.textContent = "📋 Copiar Link das Respostas";
+      copyLinkBtn.style.background = "#2e9b61";
+    }, 3000);
+  }).catch(err => {
+    alert("Erro ao copiar. Copie este link manualmente: " + fullUrl);
+  });
+});
+
+function checkProfessorMode() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("modo") === "prof") {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("scratch").style.display = "none";
+    document.getElementById("conceitos").style.display = "none";
+    document.getElementById("quiz").style.display = "none";
+    
+    const profPanel = document.getElementById("professorPanel");
+    profPanel.style.display = "block";
+    
+    const alunoNome = urlParams.get("nome") || "Não identificado";
+    const alunoTurma = urlParams.get("turma") || "Não informada";
+    const respostasRaw = urlParams.get("respostas") || "";
+    const respostasAluno = respostasRaw.split(",").map(Number);
+    
+    document.getElementById("profTitle").textContent = `Respostas de: ${alunoNome}`;
+    document.getElementById("profClassTitle").textContent = `Turma: ${alunoTurma}`;
+    
+    let totalAcertos = 0;
+    let listHtml = "";
+    
+    quizQuestions.forEach((item, index) => {
+      const respAlunoIndex = respostasAluno[index];
+      const foiCorreta = respAlunoIndex === item.c;
+      if (foiCorreta) totalAcertos++;
+      
+      const textoRespAluno = respAlunoIndex !== undefined && respAlunoIndex >= 0 ? item.a[respAlunoIndex] : "Não respondida";
+      const textoRespCorreta = item.a[item.c];
+      
+      listHtml += `
+        <div style="padding: 20px; border-radius: 12px; border: 2px solid ${foiCorreta ? '#e6f7ed' : '#fdeded'}; background: ${foiCorreta ? '#f4fbf7' : '#fef8f8'}; margin-bottom: 12px;">
+          <h4 style="margin-bottom: 8px; color: var(--dark)">${index + 1}. ${item.q}</h4>
+          <p style="font-size: 0.92rem; margin-bottom: 4px;">
+            <strong>Resposta do aluno:</strong> 
+            <span style="color: ${foiCorreta ? '#2e9b61' : '#d04b4b'}; font-weight: bold;">${textoRespAluno} ${foiCorreta ? '✓' : '✗'}</span>
+          </p>
+          ${!foiCorreta ? `<p style="font-size: 0.92rem; color: var(--muted)"><strong>Resposta correta:</strong> ${textoRespCorreta}</p>` : ''}
+        </div>
+      `;
+    });
+    
+    document.getElementById("profScoreSummary").innerHTML = `O aluno acertou <strong>${totalAcertos} de ${quizQuestions.length}</strong> perguntas.`;
+    document.getElementById("profAnswersList").innerHTML = listHtml;
+  }
+}
+
+loadQuestion();
+checkProfessorMode();
+</script>
+</body>
+</html>
